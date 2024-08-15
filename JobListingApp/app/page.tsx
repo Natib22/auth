@@ -7,7 +7,7 @@ import React, { Key, useState, useMemo } from "react";
 import JobCard from "./components/JobCard";
 import { useGetJobsQuery } from "./features/api/apiSlice";
 import { useDispatch } from "react-redux";
-// import { jobOrder } from "./features/data/dataSlice";
+import Nav from "./components/Nav";
 import { JobData } from "./features/api/apiInterface";
 const Home = () => {
   const { data: sessionData, status } = useSession();
@@ -61,12 +61,13 @@ const Home = () => {
 
   return (
     <>
+      <Nav />
       <div className="py-20 px-32">
         <div className="w-919 h-1350">
           {/* Header */}
           <div className="flex justify-between h-16 items-center">
             <div className="flex flex-col">
-              <p className="flex justify-between text-32 w-60 font-poppins text-titleColor font-extrabold leading-[38.4px]">
+              <p className="flex justify-between text-[32px] w-60 font-poppins text-titleColor font-extrabold leading-[38.4px]">
                 Opportunities
               </p>
               <p className="text-grayParagraph text-base">

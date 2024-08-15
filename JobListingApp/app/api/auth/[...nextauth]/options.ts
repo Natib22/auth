@@ -9,9 +9,11 @@ export const options = {
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
       profile(profile) {
+        console.log("from options" , profile)
         return {
           ...profile,
           id: profile.sub,
+          provider: "google",
         };
       },
     }),
@@ -49,7 +51,9 @@ export const options = {
 
   callbacks : {
     async session({ session, token }: { session: any, token: any }) {
-      // Handle the session based on the token properties
+      console.log(token)
+      if (session.user.image) 
+        session.user.image = token.picture;
       if (token.accessToken) {
         session.accessToken = token.accessToken; // Google
       } else if (token.customToken) {

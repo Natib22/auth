@@ -157,7 +157,7 @@ const Otpinput = () => {
           >
             Resend
           </a>{" "}
-          {/* {isDisabled && `in ${counter} seconds`} */}
+          {isDisabled && `in ${counter} seconds`}
         </div>
 
         <button
