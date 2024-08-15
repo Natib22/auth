@@ -46,8 +46,8 @@ This project is a job listing platform that integrates user authentication using
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/job-listing-platform.git
-   cd job-listing-platform
+   git clone https://github.com/Natib22/auth.git
+   cd JobListingApp
    ```
 
 2. Install dependencies:
