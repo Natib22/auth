@@ -43,7 +43,7 @@ const SignupForm = () => {
 
       const result = await response.json();
       if (result?.success == true) {
-        router.push("/auth/otp");
+        router.push(`/auth/otp?email=${encodeURIComponent(data.email)}`);
       }
       // Handle successful signup here (e.g., redirect to login or home page)
     } catch (error) {
@@ -209,7 +209,7 @@ const SignupForm = () => {
             type="submit"
             className="btn  w-full bg-custom-gradient text-white rounded-[80px]"
           >
-            Login
+            Continue
           </button>
         </form>
 
@@ -221,8 +221,8 @@ const SignupForm = () => {
         </p>
 
         <p className="text-[#7C8493]">
-          By clicking 'Continue', you acknowledge that you have read and
-          accepted our{" "}
+          By clicking &rsquo;Continue&rsquo;, you acknowledge that you have read
+          and accepted our{" "}
           <span className="text-bluepurple"> Terms of Service</span> and
           <span className="text-bluepurple">Privacy Policy</span> .
         </p>

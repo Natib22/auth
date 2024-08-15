@@ -2,15 +2,12 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 interface FormData {
   email: string;
   password: string;
 }
-const onSubmit = (data: FormData) => {
-  console.log(data.email);
-  console.log("here");
-};
 
 const LoginForm = () => {
   const router = useRouter();
@@ -19,6 +16,24 @@ const LoginForm = () => {
   };
   const { register, handleSubmit, formState } = useForm<FormData>();
   const { errors } = formState;
+
+  const login = async (data: FormData) => {
+    const result = await signIn("credentials", {
+      redirect: false,
+      email: data.email,
+      password: data.password,
+    });
+
+    if (result?.ok) {
+      console.log("login success");
+      console.log(result);
+      router.push("/");
+    } else {
+      // Handle errors here (e.g., show a notification)
+      console.error(result);
+    }
+  };
+
   return (
     <div className="w-[408px] relative mt-[141px] h-auto flex gap-6 flex-col">
       <h1 className="font-black text-[32px] text-center">Welcome Back,</h1>
@@ -39,7 +54,7 @@ const LoginForm = () => {
         <line x1="300" y1="0.5" x2="408" y2="0.499991" stroke="#D6DDEB" />
       </svg>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+      <form onSubmit={handleSubmit(login)} className="flex flex-col gap-4">
         <div className="flex flex-col gap-1">
           <p className="font-semibold text-base text-semigray font-epilogue">
             Email Address

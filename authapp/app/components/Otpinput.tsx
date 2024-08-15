@@ -1,10 +1,56 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const Otpinput = () => {
   const [values, setValues] = useState<string[]>(["", "", "", ""]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const inputRefs = useRef<HTMLInputElement[]>([]);
+  const [counter, setCounter] = useState(30);
+  const [isDisabled, setIsDisabled] = useState(true);
+
+  const searchParams = useSearchParams();
+  const email = searchParams.get("email") || "";
+  const router = useRouter();
+
+  const otpsubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log("otpsubmit function called"); // Check if this is logged
+    let otp = values.join("");
+    console.log(email); // Check if email is defined
+    if (otp) {
+      console.log(otp, "initially before fetch");
+      try {
+        const response = await fetch(
+          "https://akil-backend.onrender.com/verify-email",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: email,
+              OTP: otp,
+            }),
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const result = await response.json();
+        if (result?.success) {
+          console.log("otp success");
+          router.push("/auth/login");
+        } else {
+          console.error("OTP verification failed");
+        }
+      } catch (error) {
+        console.error("Error during OTP submission:", error);
+      }
+    }
+  };
+
   useEffect(() => {
     let count = 0;
     values.forEach((value) => {
@@ -13,6 +59,18 @@ const Otpinput = () => {
     if (count == 4) setIsSubmitting(true);
     else setIsSubmitting(false);
   }, [values]);
+
+  useEffect(() => {
+    if (counter > 0) {
+      const timer = setInterval(() => {
+        setCounter((prevCounter) => prevCounter - 1);
+      }, 1000);
+
+      return () => clearInterval(timer); // Clear timer on cleanup
+    } else {
+      setIsDisabled(false);
+    }
+  }, [counter]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -72,7 +130,7 @@ const Otpinput = () => {
 
   return (
     <>
-      <form id="otp-form" className="flex flex-col gap-11">
+      <form id="otp-form" className="flex flex-col gap-11" onSubmit={otpsubmit}>
         <div className="flex items-center justify-center gap-8">
           {values.map((value, index) => (
             <input
@@ -99,7 +157,7 @@ const Otpinput = () => {
           >
             Resend
           </a>{" "}
-          the code in 00:30
+          {/* {isDisabled && `in ${counter} seconds`} */}
         </div>
 
         <button
