@@ -21,7 +21,7 @@ const Home = () => {
   const dispatch = useDispatch();
 
   // Determine jobs based on fetched data
-  const jobs = data?.data || [];
+  const jobs = useMemo(() => data?.data || [], [data]);
 
   const sortJobs = (jobs: JobData[], order: string): JobData[] => {
     switch (order) {
@@ -110,13 +110,6 @@ const Home = () => {
         </div>
       </div>
     </>
-    // <div>
-
-    //   <p className="text-4xl">Hello {sessionData?.user?.name}</p>
-    //   <button onClick={() => signOut({ callbackUrl: "/auth/signup" })}>
-    //     Logout
-    //   </button>
-    // </div>
   );
 };
 

@@ -1,4 +1,4 @@
-import NextAuth from "next-auth";
+
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 
@@ -25,7 +25,7 @@ export const options = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        // Send credentials to your backend for verification
+        // credentials to backend for verification
         const res = await fetch("https://akil-backend.onrender.com/login", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -42,8 +42,8 @@ export const options = {
           return null;
         }
 
-        // If successful, return user object
-        return user.data; // Assuming `data` contains the user info
+     
+        return user.data; 
       },
     }),
     
@@ -67,7 +67,7 @@ export const options = {
         return token;
       },
   }
-  // Add additional options here
+ 
 };
 
 
