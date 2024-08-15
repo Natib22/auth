@@ -124,6 +124,8 @@ This project is a job listing platform that integrates user authentication using
 ---
 
 ![alt text](<./screenshots/Screenshot 2024-08-15 at 3.13.09 in the afternoon.png>)
-![alt text](<./screenshots/Screenshot 2024-08-15 at 3.13.30 in the afternoon.png>) ![alt text](<./screenshots/Screenshot 2024-08-15 at 3.14.32 in the afternoon.png>) ![alt text](<./screenshots/Screenshot 2024-08-15 at 3.16.39 in the afternoon.png>)
+![alt text](<./screenshots/Screenshot 2024-08-15 at 3.13.30 in the afternoon.png>) ![alt text](<./screenshots/Screenshot 2024-08-15 at 3.14.32 in the afternoon.png>)
+![alt text](<./screenshots/Screenshot 2024-08-15 at 3.41.28 in the afternoon.png>)
+![alt text](<./screenshots/Screenshot 2024-08-15 at 3.16.39 in the afternoon.png>)
 ![alt text](./screenshots/777A3DC2-1323-47AB-AAD0-BED701D01410_1_201_a.jpeg)
 ![alt text](<./screenshots/localhost_3000_ (3).png>)
