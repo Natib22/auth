@@ -1,5 +1,3 @@
-Here's a README documentation for your project:
-
 ---
 
 # Job Listing Platform with Authentication
