@@ -34,6 +34,7 @@ const JobCard = (job: JobData) => {
   const modifyBookmark = async (event: React.MouseEvent) => {
     event.stopPropagation(); // Prevents the event from bubbling up
     setBookmark((prev) => !prev);
+    job.isBookmarked = !job.isBookmarked;
     console.log("bookmark getting clicked", bookmark);
     try {
       if (bookmark) {

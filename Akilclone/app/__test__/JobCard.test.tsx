@@ -7,6 +7,7 @@ import configureStore from "redux-mock-store";
 import { useSession } from "next-auth/react";
 import { Provider } from "react-redux";
 import { RootState } from "@/app/store/store";
+import userEvent from "@testing-library/user-event";
 
 const job = {
   id: "654e1ae353a7667de6ef59ee",
@@ -143,29 +144,52 @@ describe("JobCard", () => {
     }
   });
 
-  // it("should toggle the bookmark state on click", async () => {
+  it("should toggle the bookmark state on click", async () => {
+    const {
+      useBookmarkMutation,
+      useUnBookmarkMutation,
+    } = require("../features/api/apiSlice");
 
-  //   renderComponent();
+    useBookmarkMutation.mockReturnValue([
+      jest.fn(),
+      {
+        data: null,
+        isLoading: false,
+        isError: false,
+      },
+    ]);
 
-  //   const bookmarkButton = screen.getByRole("button");
+    useUnBookmarkMutation.mockReturnValue([
+      jest.fn(), // This would be your mutation function
+      {
+        data: null,
+        isLoading: false,
+        isError: false,
+      },
+    ]);
 
-  //   // Initial state check
-  //   let img = bookmarkButton.querySelector("img");
-  //   if (job.isBookmarked) {
-  //     expect(img).toHaveAttribute("alt", "bookmarked");
-  //   } else {
-  //     expect(img).toHaveAttribute("alt", "unbookmarked");
-  //   }
+    renderComponent();
 
-  //   // Simulate a click to toggle the bookmark
-  //   bookmarkButton.click();
+    const bookmarkButton = screen.getByRole("button");
 
-  //   // After click, re-query the image element to check the updated state
-  //   img = bookmarkButton.querySelector("img");
-  //   if (job.isBookmarked) {
-  //     expect(img).toHaveAttribute("alt", "unbookmarked"); // State should toggle
-  //   } else {
-  //     expect(img).toHaveAttribute("alt", "bookmarked"); // State should toggle
-  //   }
-  // });
+    // Initial state check
+    let img = bookmarkButton.querySelector("img");
+    let initialBookmarkState = job.isBookmarked;
+    if (job.isBookmarked) {
+      expect(img).toHaveAttribute("alt", "bookmarked");
+    } else {
+      expect(img).toHaveAttribute("alt", "unbookmarked");
+    }
+
+    // Simulate a click to toggle the bookmark
+    userEvent.click(bookmarkButton);
+
+    // After click, re-query the image element to check the updated state
+    img = bookmarkButton.querySelector("img");
+    if (initialBookmarkState) {
+      expect(img).toHaveAttribute("alt", "bookmarked"); // State should toggle
+    } else {
+      expect(img).toHaveAttribute("alt", "unbookmarked"); // State should toggle
+    }
+  });
 });
