@@ -2,11 +2,10 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import React, { Key, useState, useMemo } from "react";
 import JobCard from "./components/JobCard";
 import { useGetJobsQuery } from "./features/api/apiSlice";
-import { useDispatch } from "react-redux";
 import Nav from "./components/Nav";
 import { JobData } from "./features/api/apiInterface";
 const Home = () => {
@@ -14,6 +13,7 @@ const Home = () => {
 
   const router = useRouter();
   const [current, setCurrent] = useState("Most relevant");
+  const [search, setSearch] = useState("");
 
   // Fetch jobs using RTK Query
   const { data, error, isLoading } = useGetJobsQuery();
@@ -73,6 +73,14 @@ const Home = () => {
               </p>
             </div>
 
+            {/* Search bar */}
+            <input
+              type="text"
+              placeholder="Search for jobs"
+              className="w-96 h-10 rounded-md border border-gray-300 px-4"
+              onChange={(e) => setSearch(e.target.value)}
+            />
+
             {/* Sort by dropdown */}
             <div className="flex items-center h-9">
               <span className="font-epilogue text-grayParagraph pr-2 leading-[25.6px]">
@@ -102,9 +110,15 @@ const Home = () => {
           </div>
 
           {/* Job Cards */}
-          {sortedJobs.map((job: JobData, index: Key | null | undefined) => (
-            <JobCard {...job} key={job.id} />
-          ))}
+          {sortedJobs
+            .filter((item) => {
+              return search.toLowerCase() === ""
+                ? item
+                : item.title.toLowerCase().includes(search);
+            })
+            .map((job: JobData, index: Key | null | undefined) => (
+              <JobCard {...job} key={job.id} />
+            ))}
         </div>
       </div>
     </>

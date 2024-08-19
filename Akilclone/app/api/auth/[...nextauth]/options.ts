@@ -44,7 +44,7 @@ export const options = {
           return null;
         }
         
-        console.log(user.data.accessToken ,"here is the access token")
+      
         
         return user.data; 
       },
@@ -54,9 +54,7 @@ export const options = {
 
   callbacks : {
     async session({ session, token }: { session: any, token: any }) {
-      console.log(token , "token")
-      console.log(session, " session")
-
+  
       if (session.user.image) 
         session.user.image = token.picture;
       if (token.accessToken) {
