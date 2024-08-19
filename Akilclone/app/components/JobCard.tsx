@@ -24,8 +24,6 @@ const shortenJobDescription = (description: string) => {
 const JobCard = (job: JobData) => {
   const [bookmark, setBookmark] = useState(job.isBookmarked);
 
-  const { data } = useGetBookmarksQuery();
-
   const [Bookmark, { isLoading: isBookmarking, isError: isBookmarkError }] =
     useBookmarkMutation();
   const [
@@ -70,9 +68,13 @@ const JobCard = (job: JobData) => {
           <p className="text-xl">{job.title}</p>
           <button onClick={modifyBookmark}>
             {bookmark ? (
-              <Image className="h-10 w-10" src={bookmarked} alt="" />
+              <Image className="h-10 w-10" src={bookmarked} alt="bookmarked" />
             ) : (
-              <Image className="h-10 w-10" src={unbookmarked} alt="" />
+              <Image
+                className="h-10 w-10"
+                src={unbookmarked}
+                alt="unbookmarked"
+              />
             )}
           </button>
         </div>
