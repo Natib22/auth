@@ -14,9 +14,9 @@ export const apiSlice = createApi({
       baseUrl,
       prepareHeaders: (headers) => {
         // If there's a session with an access token, add it to the headers
-       
-          headers.set('Authorization', `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YmRiMWFlZjE2YWFhNTg4ODk4YzIyNCIsInJvbGUiOiJ1c2VyIiwicHJvZmlsZVN0YXR1cyI6ImluY29tcGxldGUiLCJleHAiOjE3MjQzMzQ3OTJ9.ZXwAmO6Ci1XsY1znzmkSXJKhPs59WclKBntZXO7R9eU`);
-        
+        if (session?.user.accessToken) {
+          headers.set('Authorization', `Bearer ${session.user.accessToken}`);
+        }
         return headers;
       },
     })(args, api, extraOptions);

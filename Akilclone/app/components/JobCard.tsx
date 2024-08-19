@@ -25,7 +25,7 @@ const JobCard = (job: JobData) => {
   const [bookmark, setBookmark] = useState(job.isBookmarked);
 
   const { data } = useGetBookmarksQuery();
-  console.log(data);
+
   const [Bookmark, { isLoading: isBookmarking, isError: isBookmarkError }] =
     useBookmarkMutation();
   const [
@@ -33,29 +33,16 @@ const JobCard = (job: JobData) => {
     { isLoading: isUnBookmarking, isError: isUnBookmarkError },
   ] = useUnBookmarkMutation();
 
-  useEffect(() => {
-    console.log("from bookmarks");
-    const temp = data?.data;
-    if (Array.isArray(temp)) {
-      for (let i = 0; i < temp.length; i++) {
-        if (job.id === temp[i].eventID) {
-          setBookmark(true);
-          break; // Exit loop early if a match is found
-        }
-      }
-    }
-  });
-
   const modifyBookmark = async (event: React.MouseEvent) => {
     event.stopPropagation(); // Prevents the event from bubbling up
-    setBookmark(!bookmark);
+    setBookmark((prev) => !prev);
+    console.log("bookmark getting clicked", bookmark);
     try {
       if (bookmark) {
         await unBookmark(job.id).unwrap();
       } else {
         await Bookmark(job.id).unwrap();
       }
-      console.log();
     } catch (error) {
       console.error("Error modifying bookmark:", error);
       // Handle error (e.g., show an error message)
