@@ -1,6 +1,5 @@
-Here’s a revised version of your Markdown file with corrections to the image paths and other minor adjustments for clarity:
+Here’s the revised Markdown file with corrections to the image paths and formatting:
 
-````markdown
 # Job Listing Platform with Authentication
 
 This project is a job listing platform that integrates user authentication using NextAuth.js, state management using Redux, and job listing functionality with RTK Query. The platform allows users to log in using their Google account, browse job opportunities, and manage their session.
@@ -51,7 +50,6 @@ This project is a job listing platform that integrates user authentication using
    cd auth
    cd AkilClone
    ```
-````
 
 2. Install dependencies:
 
@@ -126,7 +124,7 @@ This project is a job listing platform that integrates user authentication using
   - JobCard.tsx       # Displays individual job details
   - Nav.tsx           # Navigation bar component
   - LoginForm.tsx
-  - OtpFrom.tsx
+  - OtpForm.tsx
   - SignUpForm.tsx
 
 /features
@@ -140,15 +138,14 @@ This project is a job listing platform that integrates user authentication using
 
 ---
 
-Make sure the images are named correctly and placed in the right directory. The `%20` is used for spaces in URLs, so if your file names contain spaces, it’s better to use underscores or dashes for compatibility.
-
-![alt text](<./screenshots/Screenshot 2024-08-15 at 3.13.09 in the afternoon.png>)
-![alt text](<./screenshots/Screenshot 2024-08-15 at 3.13.30 in the afternoon.png>) ![alt text](<./screenshots/Screenshot 2024-08-15 at 3.14.32 in the afternoon.png>)
-![alt text](<./screenshots/Screenshot 2024-08-15 at 3.41.28 in the afternoon.png>)
-![alt text](<./screenshots/Screenshot 2024-08-15 at 3.16.39 in the afternoon.png>)
-![alt text](./screenshots/777A3DC2-1323-47AB-AAD0-BED701D01410_1_201_a.jpeg)
-![alt text](<./screenshots/localhost_3000_ (4).png>)
-![alt text](<./screenshots/localhost_3000_bookmark (1).png>)
-![alt text](./screenshots/cypress1.png)
-![alt text](./screenshots/cypress2.png)
-![alt text](./screenshots/jest.png)
+![Screenshot 2024-08-15 at 3.13.09 PM](./screenshots/Screenshot%202024-08-15%20at%203.13.09%20in%20the%20afternoon.png)
+![Screenshot 2024-08-15 at 3.13.30 PM](./screenshots/Screenshot%202024-08-15%20at%203.13.30%20in%20the%20afternoon.png)
+![Screenshot 2024-08-15 at 3.14.32 PM](./screenshots/Screenshot%202024-08-15%20at%203.14.32%20in%20the%20afternoon.png)
+![Screenshot 2024-08-15 at 3.41.28 PM](./screenshots/Screenshot%202024-08-15%20at%203.16.39%20in%20the%20afternoon.png)
+![Screenshot 2024-08-15 at 3.16.39 PM](./screenshots/Screenshot%202024-08-15%20at%203.32.19%20in%20the%20afternoon.png)
+![Image](./screenshots/777A3DC2-1323-47AB-AAD0-BED701D01410_1_201_a.jpeg)
+![Image](<./screenshots/localhost_3000_%20(4).png>)
+![Image](<./screenshots/localhost_3000_bookmark%20(1).png>)
+![Image](./screenshots/cypress1.png)
+![Image](./screenshots/cypress2.png)
+![Image](./screenshots/jest.png)
