@@ -17,7 +17,7 @@ import {
 
 const shortenJobDescription = (description: string) => {
   return description.length > 400
-    ? description.substring(0, 400) + "..."
+    ? description.substring(0, 300) + "..."
     : description;
 };
 
@@ -53,6 +53,8 @@ const JobCard = (job: JobData) => {
 
   return (
     <div
+      data-testid={`job-card-${job.id}`}
+      data-job-id={job.id}
       onClick={() => navigate.push(`/job/${job.id}`)}
       className="flex h-[262px] mt-8 rounded-3xl p-[26px] gap-6 border border-[#D6DDEB] hover:bg-gray-200 "
     >
@@ -64,9 +66,9 @@ const JobCard = (job: JobData) => {
         height={59} // Specify height
       />
 
-      <div className="flex gap-2 flex-col  w-full">
+      <div className="flex gap-2 flex-col  w-full h-auto">
         <div className="flex justify-between w-full items-center">
-          <p className="text-xl">{job.title}</p>
+          <h1 className="text-xl">{job.title}</h1>
           <button data-testid={`bookmark-button`} onClick={modifyBookmark}>
             {bookmark ? (
               <Image className="h-10 w-10" src={bookmarked} alt="bookmarked" />

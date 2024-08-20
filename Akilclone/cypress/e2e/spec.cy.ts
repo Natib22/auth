@@ -1,48 +1,55 @@
-// cypress/e2e/jobcard_spec.js
+describe('Bookmarking functionality', () => {
+  let firstJobId: string;
+  let accessToken: string;
 
-describe('JobCard Component', () => {
-  beforeEach(() => {
-    // Visit the login page before each test
+  before(() => {
+    // Visit the login page
     cy.visit('http://localhost:3000/');
-  // Adjust the URL if necessary
-  });
 
-  it('should successfully log in with valid credentials and toggle the bookMark button', () => {
-    
+    // Log in with valid credentials
     cy.get('input#email').type('niyix60067@lisoren.com');
     cy.get('input[type="password"]').type('1234');
-    
     cy.get('button[type="submit"]').click();
 
-    // cy.intercept('GET', '/opportunities/search').as('getJobs');
-
-  
-    // // Wait for the API call to complete
-    // cy.wait('@getJobs' );
-
-    // Wait for the page to redirect after login
-    cy.url().should('eq', "http://localhost:3000/");
-    
-
-     //Ensure that job cards are visible and contain the bookmark button
-    cy.get('[data-testid^="bookmark-button"]', { timeout: 20000 }).should('exist');
-
-    // Click the first bookmark button
-    cy.get('[data-testid^="bookmark-button"]').first().click();
-
-
-
+    // Wait for the session to be established
+    cy.intercept('GET', '**/api/auth/session').as('sessionRequest');
+    cy.wait('@sessionRequest').then((interception) => {
+      // Capture the access token from the session response if available
+      const session = interception.response.body;
+      accessToken = session.user.accessToken;
+      Cypress.env('accessToken', accessToken); // Store token in Cypress environment variable
+    });
   });
 
-  it('bookmarked card should exist in the bookmarkpage', () => {
+  beforeEach(() => {
+    // Intercept requests and add the Bearer token to the Authorization header
+    const token = Cypress.env('accessToken');
+    cy.intercept('GET', '**/bookmarks', (req) => {
+      req.headers['Authorization'] = `Bearer ${token}`;
+    }).as('getBookmarks');
+  });
 
+  it('should successfully log in with valid credentials and toggle the bookmark button', () => {
+    // Ensure that job cards are visible and contain the bookmark button
+    cy.get('[data-testid^="bookmark-button"]', { timeout: 20000 }).should('exist');
+
+    // Capture the ID of the first job card
+    cy.get('[data-testid^="job-card"]').first().then(($card) => {
+      firstJobId = $card.attr('data-job-id');
+      
+      // Ensure the ID is properly captured
+      expect(firstJobId).to.be.a('string').and.not.be.empty;
+
+      // Click the first bookmark button
+      cy.get('[data-testid^="bookmark-button"]').first().click();
+    });
+  });
+
+  it('should visit the bookmark page and verify that the job card is visible', () => {
     cy.visit('http://localhost:3000/bookmark');
-    cy.intercept('GET', '/bookmarks').as('getBookmarks');
-    cy.intercept('GET', '/opportunities/search').as('getJobs');
-    cy.wait('@getBookmarks');
-    cy.wait('@getJobs');
+    cy.wait('@getBookmarks'); // Wait for the intercepted request
 
-    cy.get('.flex.flex-col.mx-52 > div').should('exist');
-
+    // Ensure the job card with the captured ID is visible on the bookmark page
+    cy.get(`[data-testid="job-card-${firstJobId}"]`, { timeout: 10000 }).should('exist');
   });
 });

@@ -9,6 +9,7 @@ export const apiSlice = createApi({
   baseQuery: async (args, api, extraOptions) => {
     // Get the session here
     const session = await getSession();
+    
 
     return fetchBaseQuery({
       baseUrl,
