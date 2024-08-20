@@ -34,7 +34,7 @@ const JobCard = (job: JobData) => {
   const modifyBookmark = async (event: React.MouseEvent) => {
     event.stopPropagation(); // Prevents the event from bubbling up
     setBookmark((prev) => !prev);
-    job.isBookmarked = !job.isBookmarked;
+
     console.log("bookmark getting clicked", bookmark);
     try {
       if (bookmark) {
@@ -67,7 +67,7 @@ const JobCard = (job: JobData) => {
       <div className="flex gap-2 flex-col  w-full">
         <div className="flex justify-between w-full items-center">
           <p className="text-xl">{job.title}</p>
-          <button onClick={modifyBookmark}>
+          <button data-testid={`bookmark-button`} onClick={modifyBookmark}>
             {bookmark ? (
               <Image className="h-10 w-10" src={bookmarked} alt="bookmarked" />
             ) : (
