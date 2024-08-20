@@ -1,5 +1,6 @@
----
+Here’s a revised version of your Markdown file with corrections to the image paths and other minor adjustments for clarity:
 
+````markdown
 # Job Listing Platform with Authentication
 
 This project is a job listing platform that integrates user authentication using NextAuth.js, state management using Redux, and job listing functionality with RTK Query. The platform allows users to log in using their Google account, browse job opportunities, and manage their session.
@@ -30,6 +31,8 @@ This project is a job listing platform that integrates user authentication using
 - **Redux Toolkit**: State management tool.
 - **RTK Query**: Data fetching and caching tool integrated with Redux.
 - **Tailwind CSS**: Utility-first CSS framework for styling.
+- **Jest**: Unit testing.
+- **Cypress**: End-to-end testing.
 
 ## Setup
 
@@ -45,8 +48,10 @@ This project is a job listing platform that integrates user authentication using
 
    ```bash
    git clone https://github.com/Natib22/auth.git
-   cd JobListingApp
+   cd auth
+   cd AkilClone
    ```
+````
 
 2. Install dependencies:
 
@@ -99,31 +104,51 @@ This project is a job listing platform that integrates user authentication using
 ## Job Listing Functionality
 
 - **Job Data**: Fetched from a backend API using RTK Query.
+- **Searching**: Fetched from a backend API using RTK Query.
 - **Sorting**: Jobs can be sorted alphabetically or by relevance.
 - **UI Components**: Job listings are displayed using the `JobCard` component.
 
 ## Directory Structure
 
 ```
+/app
+  - __test__
+  - api
+  - assets
+  - auth
+  - bookmark
+  - component
+  - features
+  - job
+  - store
+
 /components
   - JobCard.tsx       # Displays individual job details
   - Nav.tsx           # Navigation bar component
+  - LoginForm.tsx
+  - OtpFrom.tsx
+  - SignUpForm.tsx
+
 /features
   /api
     - apiSlice.ts     # RTK Query API slice
     - apiInterface.ts # TypeScript interfaces for job data
-/pages
-  - _app.tsx          # Custom App component
-  - index.tsx         # Homepage with job listings
+
   /auth
     - [...nextauth].ts # NextAuth configuration
 ```
 
 ---
 
+Make sure the images are named correctly and placed in the right directory. The `%20` is used for spaces in URLs, so if your file names contain spaces, it’s better to use underscores or dashes for compatibility.
+
 ![alt text](<./screenshots/Screenshot 2024-08-15 at 3.13.09 in the afternoon.png>)
 ![alt text](<./screenshots/Screenshot 2024-08-15 at 3.13.30 in the afternoon.png>) ![alt text](<./screenshots/Screenshot 2024-08-15 at 3.14.32 in the afternoon.png>)
 ![alt text](<./screenshots/Screenshot 2024-08-15 at 3.41.28 in the afternoon.png>)
 ![alt text](<./screenshots/Screenshot 2024-08-15 at 3.16.39 in the afternoon.png>)
 ![alt text](./screenshots/777A3DC2-1323-47AB-AAD0-BED701D01410_1_201_a.jpeg)
-![alt text](<./screenshots/localhost_3000_ (3).png>)
+![alt text](<./screenshots/localhost_3000_ (4).png>)
+![alt text](<./screenshots/localhost_3000_bookmark (1).png>)
+![alt text](./screenshots/cypress1.png)
+![alt text](./screenshots/cypress2.png)
+![alt text](./screenshots/jest.png)

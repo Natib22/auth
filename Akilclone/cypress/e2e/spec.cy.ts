@@ -47,9 +47,9 @@ describe('Bookmarking functionality', () => {
 
   it('should visit the bookmark page and verify that the job card is visible', () => {
     cy.visit('http://localhost:3000/bookmark');
-    cy.wait('@getBookmarks'); // Wait for the intercepted request
+    cy.wait('@getBookmarks'); 
 
-    // Ensure the job card with the captured ID is visible on the bookmark page
+  
     cy.get(`[data-testid="job-card-${firstJobId}"]`, { timeout: 10000 }).should('exist');
   });
 });
