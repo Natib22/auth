@@ -16,6 +16,7 @@ This project is a job listing platform that integrates user authentication using
 
 ## Features
 
+
 - User authentication with Google using NextAuth.js
 - Job listing with sorting options
 - Protected routes that require authentication
