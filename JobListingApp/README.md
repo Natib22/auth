@@ -34,6 +34,7 @@ This project is a job listing platform that integrates user authentication using
 
 ## Setup
 
+
 ### Prerequisites
 
 - Node.js (>=14.x)
