@@ -25,6 +25,7 @@ This project is a job listing platform that integrates user authentication using
 
 ## Technologies
 
+
 - **Next.js**: Framework for building server-rendered React applications.
 - **React**: JavaScript library for building user interfaces.
 - **NextAuth.js**: Authentication library for Next.js applications.
